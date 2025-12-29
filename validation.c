@@ -6,16 +6,16 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:30 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/27 17:53:22 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 20:21:42 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	check_for_dupes(struct Node *head)
+int	check_for_dupes(struct s_Node *head)
 {
-	struct Node	*current;
-	struct Node	*duplicateFinder;
+	struct s_Node	*current;
+	struct s_Node	*duplicateFinder;
 
 	current = head;
 	duplicateFinder = NULL;

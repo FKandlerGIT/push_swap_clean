@@ -6,13 +6,13 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:04:00 by fekandle          #+#    #+#             */
-/*   Updated: 2025/11/20 14:39:33 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 20:17:20 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	list_length(struct Node *head)
+int	list_length(struct s_Node *head)
 {
 	int	len;
 
@@ -25,9 +25,9 @@ int	list_length(struct Node *head)
 	return (len);
 }
 
-int	countStack(struct Node *Stack_A)
+int	countStack(struct s_Node *Stack_A)
 {
-	struct Node	*counter;
+	struct s_Node	*counter;
 	int			count;
 
 	count = 0;
@@ -40,7 +40,7 @@ int	countStack(struct Node *Stack_A)
 	return (count);
 }
 
-void	move_Stacks(struct Node **Stack_A, struct Node **Stack_B, int bitIndex)
+void	move_Stacks(struct s_Node **Stack_A, struct s_Node **Stack_B, int bitIndex)
 {
 	char	bit;
 

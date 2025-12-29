@@ -6,76 +6,79 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:45 by marvin            #+#    #+#             */
-/*   Updated: 2025/08/04 11:45:50 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 20:28:15 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-struct Node *findLowestUnprocessedNumber(struct Node *head)
+struct s_Node	*find_lowest_unprocessed_number(struct s_Node *head)
 {
-	struct Node *lowestNode = NULL;
-	struct Node *current = head;
+	struct s_Node	*lowest_node;
+	struct s_Node	*current;
 
+	lowest_node = NULL;
+	current = head;
 	while (current != NULL)
 	{
 		if (current->process == 'u')
 		{
-			if (lowestNode == NULL || current->data < lowestNode->data)
+			if (lowest_node == NULL || current->data < lowest_node->data)
 			{
-				lowestNode = current;
+				lowest_node = current;
 			}
 		}
 		current = current->next;
 	}
-	return (lowestNode);
+	return (lowest_node);
 }
 
-// Function to process the lowest unprocessed number
-int processLowestUnprocessedNumber(struct Node *head, int newValue)
+int	process_lowest_unprocessed_number(struct s_Node *head, int newValue)
 {
-	struct Node *lowestNode = findLowestUnprocessedNumber(head);
-	if (lowestNode != NULL)
+	struct s_Node	*lowest_node;
+
+	lowest_node = find_lowest_unprocessed_number(head);
+	if (lowest_node != NULL)
 	{
-		lowestNode->data = newValue; // Assign the new sequential number
-		lowestNode->process = 'p';	 // Mark as processed
+		lowest_node->data = newValue;
+		lowest_node->process = 'p';
 		return (1);
 	}
 	return (0);
 }
-int bitSize(struct Node *data)
+
+int	bitsize(struct s_Node *data)
 {
-    int count = 0;
-    struct Node *temp = data;
+	int				count;
+	struct s_Node	*temp;
+	int				bit_length;
 
-    while(temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-    if(count == 0)
-    return(0);
-
-    int bitLength = 0;
-    while((1 << bitLength) < count)
-        bitLength++;
-    return bitLength;
+	count = 0;
+	temp = data;
+	while (temp != NULL)
+	{
+		count++;
+		temp = temp->next;
+	}
+	if (count == 0)
+		return (0);
+	bit_length = 0;
+	while ((1 << bit_length) < count)
+		bit_length++;
+	return (bit_length);
 }
 
-// Function to convert an integer to a binary string (always 9 bits)
-void intToBinary(int value, char *binary, int bitSize)
+void	int_to_binary(int value, char *binary, int bitSize)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < bitSize)
+	while (i < bitSize)
 	{
 		binary[i] = '0';
 		i++;
 	}
-
-	i = bitSize -1;
-
+	i = bitSize - 1;
 	while (i >= 0)
 	{
 		if (value & 1)
@@ -88,30 +91,30 @@ void intToBinary(int value, char *binary, int bitSize)
 	binary[bitSize] = '\0';
 }
 
-// Function to update the binary representation of each node
-void updateBinaryRepresentation(struct Node *head)
+void	update_binary_representation(struct s_Node *head)
 {
-	struct Node *current = head;
+	struct s_Node	*current;
+	int				bit_length;
+
+	current = head;
 	while (current != NULL)
 	{
-		//printf("Updating Node with data: %d\n", current->data); // Debug print
-
-		int bitLength = bitSize(head);
-		intToBinary(current->data, current->binary, bitLength);
-
-		//printf("Binary representation: %s\n", current->binary); // Verify conversion
+		bit_length = bitsize(head);
+		int_to_binary(current->data, current->binary, bit_length);
 		current = current->next;
 	}
 }
 
-int allProcessed(struct Node *head)
+int	all_processed(struct s_Node *head)
 {
-	struct Node *current = head;
+	struct s_Node	*current;
+
+	current = head;
 	while (current != NULL)
 	{
 		if (current->process == 'u')
-			return (0);			 // Return 0 if any node is unprocessed
-		current = current->next; // Move to the next node
+			return (0);
+		current = current->next;
 	}
-	return (1); // Return 1 if all nodes are processed
+	return (1);
 }

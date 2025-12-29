@@ -6,38 +6,36 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 19:27:49 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 20:21:30 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-struct Node	*createNode(int value)
+struct s_Node	*createnode(int value)
 {
-	struct Node	*newNode;
+	struct s_Node	*newnode;
 
-	newNode = (struct Node *)malloc(sizeof(struct Node));
-	if (newNode == NULL)
+	newnode = (struct s_Node *)malloc(sizeof(struct s_Node));
+	if (newnode == NULL)
 	{
 		printf("Memory allocation failed\n");
 		exit(1);
 	}
-	newNode->data = value;
-	newNode->process = 'u';
-	newNode->binary[0] = '\0';
-	newNode->next = NULL;
-	newNode->prev = NULL;
-	return (newNode);
+	newnode->data = value;
+	newnode->process = 'u';
+	newnode->binary[0] = '\0';
+	newnode->next = NULL;
+	newnode->prev = NULL;
+	return (newnode);
 }
 
-void	appendNode(struct Node **head, int value)
+void	appendNode(struct s_Node **head, int value)
 {
-	struct Node	*newNode;
-	struct Node	*temp;
+	struct s_Node	*newNode;
+	struct s_Node	*temp;
 
 	newNode = createNode(value);
-	// printf("Created node with value: %d, process: %c\n", newNode->data,
-	//	newNode->process);
 	if (*head == NULL)
 	{
 		*head = newNode;
@@ -50,18 +48,16 @@ void	appendNode(struct Node **head, int value)
 	}
 	temp->next = newNode;
 	newNode->prev = temp;
-	// printf("Appended node with value: %d, process: %c\n", newNode->data,
-	//	newNode->process);
 }
 
-void	push(struct Node **src, struct Node **dest)
+void	push(struct s_Node **src, struct s_Node **dest)
 {
-	struct Node	*temp;
+	struct s_Node	*temp;
 
 	if (*src == NULL)
 		return ;
 	temp = *src;
-		*src = (*src)->next;
+	*src = (*src)->next;
 	if (*src != NULL)
 		(*src)->prev = NULL;
 	temp->prev = NULL;
@@ -70,15 +66,13 @@ void	push(struct Node **src, struct Node **dest)
 		(*dest)->prev = temp;
 	else
 		temp->next = NULL;
-	//if((*src)->next == NULL)
-	//	*src = NULL;
 	*dest = temp;
 }
 
-void	rotate(struct Node **stack)
+void	rotate(struct s_Node **stack)
 {
-	struct Node	*tail;
-	struct Node	*temp;
+	struct s_Node	*tail;
+	struct s_Node	*temp;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
@@ -93,10 +87,10 @@ void	rotate(struct Node **stack)
 	*stack = tail;
 }
 
-void	reverse_rotate(struct Node **stack)
+void	reverse_rotate(struct s_Node **stack)
 {
-	struct Node	*current;
-	struct Node	*temp;
+	struct s_Node	*current;
+	struct s_Node	*temp;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
@@ -110,11 +104,11 @@ void	reverse_rotate(struct Node **stack)
 	temp->prev = current;
 	temp->next = NULL;
 }
-void	swap(struct Node **stack)
+void	swap(struct s_Node **stack)
 {
-	struct Node	*first;
-	struct Node	*second;
-	struct Node	*third;
+	struct s_Node	*first;
+	struct s_Node	*second;
+	struct s_Node	*third;
 
 	first = *stack;
 	second = first->next;
@@ -128,7 +122,7 @@ void	swap(struct Node **stack)
 		third->prev = first;
 }
 
-void	printStack(struct Node *stack)
+void	printStack(struct s_Node *stack)
 {
 	while (stack != NULL)
 	{
@@ -138,9 +132,9 @@ void	printStack(struct Node *stack)
 	printf("NULL\n");
 }
 
-void	freeList(struct Node *head)
+void	freeList(struct s_Node *head)
 {
-	struct Node	*temp;
+	struct s_Node	*temp;
 
 	while (head != NULL)
 	{
