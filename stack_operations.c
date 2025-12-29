@@ -1,0 +1,149 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 01:39:23 by marvin            #+#    #+#             */
+/*   Updated: 2025/12/27 17:53:10 by fekandle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pushswap.h"
+
+struct Node	*createNode(int value)
+{
+	struct Node	*newNode;
+
+	newNode = (struct Node *)malloc(sizeof(struct Node));
+	if (newNode == NULL)
+	{
+		printf("Memory allocation failed\n");
+		exit(1);
+	}
+	newNode->data = value;
+	newNode->process = 'u';
+	newNode->binary[0] = '\0';
+	newNode->next = NULL;
+	newNode->prev = NULL;
+	return (newNode);
+}
+
+void	appendNode(struct Node **head, int value)
+{
+	struct Node	*newNode;
+	struct Node	*temp;
+
+	newNode = createNode(value);
+	// printf("Created node with value: %d, process: %c\n", newNode->data,
+	//	newNode->process);
+	if (*head == NULL)
+	{
+		*head = newNode;
+		return ;
+	}
+	temp = *head;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = newNode;
+	newNode->prev = temp;
+	// printf("Appended node with value: %d, process: %c\n", newNode->data,
+	//	newNode->process);
+}
+
+void	push(struct Node **src, struct Node **dest)
+{
+	struct Node	*temp;
+
+	if (*src == NULL)
+		return ;
+	temp = *src;
+	*src = (*src)->next;
+	if (*src != NULL)
+		(*src)->prev = NULL;
+	temp->prev = NULL;
+	temp->next = *dest;
+	if (*dest != NULL)
+		(*dest)->prev = temp;
+	else
+		temp->next = NULL;
+	*dest = temp;
+}
+
+void	rotate(struct Node **stack)
+{
+	struct Node	*tail;
+	struct Node	*temp;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
+	temp = *stack;
+	while (temp->next != NULL)
+		temp = temp->next;
+	tail = temp;
+	temp->prev->next = NULL;
+	tail->prev = NULL;
+	tail->next = *stack;
+	(*stack)->prev = temp;
+	*stack = tail;
+}
+
+void	reverse_rotate(struct Node **stack)
+{
+	struct Node	*current;
+	struct Node	*temp;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
+	temp = *stack;
+	*stack = temp->next;
+	(*stack)->prev = NULL;
+	current = *stack;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = temp;
+	temp->prev = current;
+	temp->next = NULL;
+}
+void	swap(struct Node **stack)
+{
+	struct Node	*first;
+	struct Node	*second;
+	struct Node	*third;
+
+	first = *stack;
+	second = first->next;
+	third = second->next;
+	*stack = second;
+	second->prev = NULL;
+	second->next = first;
+	first->prev = second;
+	first->next = third;
+	if (third)
+		third->prev = first;
+}
+
+void	printStack(struct Node *stack)
+{
+	while (stack != NULL)
+	{
+		printf("%d -> ", stack->data);
+		stack = stack->next;
+	}
+	printf("NULL\n");
+}
+
+void	freeList(struct Node *head)
+{
+	struct Node	*temp;
+
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
+}
