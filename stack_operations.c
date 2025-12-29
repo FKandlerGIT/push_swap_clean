@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/27 17:53:10 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 19:27:49 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	push(struct Node **src, struct Node **dest)
 	if (*src == NULL)
 		return ;
 	temp = *src;
-	*src = (*src)->next;
+		*src = (*src)->next;
 	if (*src != NULL)
 		(*src)->prev = NULL;
 	temp->prev = NULL;
@@ -70,6 +70,8 @@ void	push(struct Node **src, struct Node **dest)
 		(*dest)->prev = temp;
 	else
 		temp->next = NULL;
+	//if((*src)->next == NULL)
+	//	*src = NULL;
 	*dest = temp;
 }
 

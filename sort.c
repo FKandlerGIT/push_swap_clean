@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:16 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/27 18:00:59 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 19:41:27 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,46 @@ void	sort_3(struct Node **head)
 	v.first = (*head)->data;
 	v.second = (*head)->next->data;
 	v.third = (*head)->next->next->data;
-	if (v.first < v.second && v.first < v.third)
-		ft_sa_ra(head);
-	else if (v.third < v.first && v.third < v.second)
+	if (v.first < v.second && v.second < v.third)
+		return;
+	if (v.first > v.second && v.second < v.third && v.first < v.third)
 		ft_sa(head);
-	else if (v.second < v.first && v.second < v.third)
-		ft_ra(head);
-	else if (v.first > v.second && v.second < v.third)
+	else if (v.first < v.second && v.second > v.third && v.first < v.third)
+		ft_sa_ra(head);
+	else if (v.first < v.second && v.second > v.third && v.first > v.third)
 		ft_rra(head);
-	else
+	else if (v.first > v.second && v.second < v.third && v.first > v.third)
+		ft_ra(head);
+	else if (v.first > v.second && v.second > v.third)
 		ft_sa_rra(head);
+}
+
+void	sort_4(struct Node **head)
+{
+	struct Node	*Stack_B;
+
+	Stack_B = NULL;
+	while (list_length(*head) > 3)
+	{
+		if ((*head)->data == 0)
+			ft_pb(head, &Stack_B);
+		 else
+			ft_ra(head);
+	}
+	if (list_length(*head)== 3)
+	sort_3(head);
+	while (Stack_B != NULL){
+		ft_pa(head, &Stack_B);
+		printf("Stack_B after pa: %p\n", (void*)Stack_B);
+	}
+	if((*head) && (*head)->next && (*head)->data >(*head)->next->data)
+			ft_sa(head);
 }
 
 void	sort_5(struct Node **head)
 {
 	struct Node	*Stack_B;
-	//struct Node	*current;
-	//int			i;
-
+	
 	Stack_B = NULL;
 	while (list_length(*head) > 3)
 	{
@@ -72,17 +94,15 @@ void	sort_5(struct Node **head)
 			ft_pb(head, &Stack_B);
 		 else
 			ft_ra(head);
-		}
+	}
 	if (list_length(*head)== 3)
 	sort_3(head);
-	while (list_length(Stack_B)==2)
-	{
-		ft_pa(&Stack_B, head);
-		ft_pa(&Stack_B, head);
-	}	
-	if((*head)->data>(*head)->next->data)
-		ft_sa(head);
-	//*head = Stack_A;
+	while (Stack_B != NULL){
+		ft_pa(head, &Stack_B);
+		printf("Stack_B after pa: %p\n", (void*)Stack_B);
+	}
+	if((*head) && (*head)->next && (*head)->data >(*head)->next->data)
+			ft_sa(head);
 }
 
 void	Sorting(struct Node **head)

@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/20 15:40:36 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 19:43:31 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				move_and_write(cmd command, struct Node **Stack_A,
 void			move_Stacks(struct Node **Stack_A, struct Node **Stack_B,
 					int bitIndex);
 void			sort_3(struct Node **head);
+void			sort_4(struct Node **head);
 void			sort_5(struct Node **head);
 
 int				ft_atoi(const char *str);

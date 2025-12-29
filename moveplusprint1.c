@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:17:48 by fekandle          #+#    #+#             */
-/*   Updated: 2025/12/15 19:04:40 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 19:22:01 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_ra(struct Node **head)
 }
 void	ft_pa(struct Node **A, struct Node **B)
 {
-	push(B, A);
+	push(&(*B) , &(*A));
 	ft_printf("pa\n");
 }
 void	ft_pb(struct Node **A, struct Node **B)

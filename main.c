@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:58 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/14 01:50:31 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/29 19:42:58 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	main(int argc, char *argv[])
 	count = argc - 1;
 	if (count == 3)
 		sort_3(&head);
+	else if (count == 4)
+		sort_4(&head);
 	else if (count == 5)
 		sort_5(&head);
 	else
@@ -112,6 +114,7 @@ int	main(int argc, char *argv[])
 		printf("Sorting Failed.\n");
 		return (1);
 	}
+	freeList(head);
 	printf("%d\n", count);
 	return (0);
 }
