@@ -6,32 +6,33 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:16 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 20:20:11 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 21:07:52 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	move_and_write(t_cmd command, struct s_Node **Stack_A, struct s_Node **Stack_B)
+int	move_and_write(t_cmd command, struct s_Node **stack_a,
+		struct s_Node **stack_b)
 {
 	int	count;
 
 	count = 0;
 	if (command == pa)
 	{
-		push(Stack_B, Stack_A);
+		push(stack_b, stack_a);
 		printf("pa\n");
 		count++;
 	}
 	else if (command == pb)
 	{
-		push(Stack_A, Stack_B);
+		push(stack_a, stack_b);
 		printf("pb\n");
 		count++;
 	}
 	else if (command == ra)
 	{
-		rotate(Stack_A);
+		rotate(stack_a);
 		printf("ra\n");
 		count++;
 	}
@@ -63,22 +64,22 @@ void	sort_3(struct s_Node **head)
 
 void	sort_4(struct s_Node **head)
 {
-	struct s_Node	*Stack_B;
+	struct s_Node	*stack_b;
 
-	Stack_B = NULL;
+	stack_b = NULL;
 	while (list_length(*head) > 3)
 	{
 		if ((*head)->data == 0)
-			ft_pb(head, &Stack_B);
+			ft_pb(head, &stack_b);
 		else
 			ft_ra(head);
 	}
 	if (list_length(*head) == 3)
 		sort_3(head);
-	while (Stack_B != NULL)
+	while (stack_b != NULL)
 	{
-		ft_pa(head, &Stack_B);
-		printf("Stack_B after pa: %p\n", (void *)Stack_B);
+		ft_pa(head, &stack_b);
+		printf("stack_b after pa: %p\n", (void *)stack_b);
 	}
 	if ((*head) && (*head)->next && (*head)->data > (*head)->next->data)
 		ft_sa(head);
@@ -86,53 +87,52 @@ void	sort_4(struct s_Node **head)
 
 void	sort_5(struct s_Node **head)
 {
-	struct s_Node	*Stack_B;
+	struct s_Node	*stack_b;
 
-	Stack_B = NULL;
+	stack_b = NULL;
 	while (list_length(*head) > 3)
 	{
 		if ((*head)->data == 0 || (*head)->data == 1)
-			ft_pb(head, &Stack_B);
+			ft_pb(head, &stack_b);
 		else
 			ft_ra(head);
 	}
 	if (list_length(*head) == 3)
 		sort_3(head);
-	while (Stack_B != NULL)
+	while (stack_b != NULL)
 	{
-		ft_pa(head, &Stack_B);
-		printf("Stack_B after pa: %p\n", (void *)Stack_B);
+		ft_pa(head, &stack_b);
+		printf("stack_b after pa: %p\n", (void *)stack_b);
 	}
 	if ((*head) && (*head)->next && (*head)->data > (*head)->next->data)
 		ft_sa(head);
 }
 
-void	Sorting(struct s_Node **head)
+void	sorting(struct s_Node **head)
 {
-	t_sort		s;
-	struct s_Node	*Stack_A;
-	struct s_Node	*Stack_B;
+	t_sort			s;
+	struct s_Node	*stack_a;
+	struct s_Node	*stack_b;
 
 	if (*head == NULL)
 		return ;
-	s.maxbits = bitSize(*head);
-	Stack_A = *head;
-	Stack_B = NULL;
+	s.maxbits = bit_size(*head);
+	stack_a = *head;
+	stack_b = NULL;
 	s.bitindex = s.maxbits - 1;
 	while (s.bitindex >= 0)
 	{
-		s.count = countStack(Stack_A);
+		s.count = count_stack(stack_a);
 		s.i = 0;
 		while (s.i < s.count)
 		{
-			move_Stacks(&Stack_A, &Stack_B, s.bitindex);
+			move_stacks(&stack_a, &stack_b, s.bitindex);
 			s.i++;
 		}
-		while (Stack_B != NULL)
-			move_and_write(pa, &Stack_A, &Stack_B);
+		while (stack_b != NULL)
+			move_and_write(pa, &stack_a, &stack_b);
 		s.bitindex--;
 	}
-	*head = Stack_A;
-	printStack(*head);
-	ft_printf("%d\n ", s.count);
+	*head = stack_a;
+	print_stack(*head);
 }

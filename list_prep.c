@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:45 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 20:28:15 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 20:58:35 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	process_lowest_unprocessed_number(struct s_Node *head, int newValue)
 	return (0);
 }
 
-int	bitsize(struct s_Node *data)
+int	bit_size(struct s_Node *data)
 {
 	int				count;
 	struct s_Node	*temp;
@@ -99,22 +99,8 @@ void	update_binary_representation(struct s_Node *head)
 	current = head;
 	while (current != NULL)
 	{
-		bit_length = bitsize(head);
+		bit_length = bit_size(head);
 		int_to_binary(current->data, current->binary, bit_length);
 		current = current->next;
 	}
-}
-
-int	all_processed(struct s_Node *head)
-{
-	struct s_Node	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		if (current->process == 'u')
-			return (0);
-		current = current->next;
-	}
-	return (1);
 }

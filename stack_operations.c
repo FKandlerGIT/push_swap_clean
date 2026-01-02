@@ -6,49 +6,11 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 20:21:30 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 20:57:58 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-struct s_Node	*createnode(int value)
-{
-	struct s_Node	*newnode;
-
-	newnode = (struct s_Node *)malloc(sizeof(struct s_Node));
-	if (newnode == NULL)
-	{
-		printf("Memory allocation failed\n");
-		exit(1);
-	}
-	newnode->data = value;
-	newnode->process = 'u';
-	newnode->binary[0] = '\0';
-	newnode->next = NULL;
-	newnode->prev = NULL;
-	return (newnode);
-}
-
-void	appendNode(struct s_Node **head, int value)
-{
-	struct s_Node	*newNode;
-	struct s_Node	*temp;
-
-	newNode = createNode(value);
-	if (*head == NULL)
-	{
-		*head = newNode;
-		return ;
-	}
-	temp = *head;
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	temp->next = newNode;
-	newNode->prev = temp;
-}
 
 void	push(struct s_Node **src, struct s_Node **dest)
 {
@@ -104,6 +66,7 @@ void	reverse_rotate(struct s_Node **stack)
 	temp->prev = current;
 	temp->next = NULL;
 }
+
 void	swap(struct s_Node **stack)
 {
 	struct s_Node	*first;
@@ -120,26 +83,4 @@ void	swap(struct s_Node **stack)
 	first->next = third;
 	if (third)
 		third->prev = first;
-}
-
-void	printStack(struct s_Node *stack)
-{
-	while (stack != NULL)
-	{
-		printf("%d -> ", stack->data);
-		stack = stack->next;
-	}
-	printf("NULL\n");
-}
-
-void	freeList(struct s_Node *head)
-{
-	struct s_Node	*temp;
-
-	while (head != NULL)
-	{
-		temp = head;
-		head = head->next;
-		free(temp);
-	}
 }

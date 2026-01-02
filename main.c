@@ -6,13 +6,13 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:58 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 20:01:48 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 19:13:59 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	check_and_exit_on_dupes(struct Node *head)
+int	check_and_exit_on_dupes(struct s_Node *head)
 {
 	if (check_for_dupes(head))
 	{
@@ -21,6 +21,7 @@ int	check_and_exit_on_dupes(struct Node *head)
 	}
 	return (0);
 }
+
 int	check_overflow_single(char *str)
 {
 	int	result;
@@ -45,21 +46,21 @@ int	check_overflow_single(char *str)
 		result = result * 10 + digit;
 		j++;
 	}
-	return (0); // safe
+	return (0);
 }
 
 int	main(int argc, char *argv[])
 {
-	struct Node	*head;
-	int			i;
-	int			value;
-	int			newValue;
-	int			j;
-	int			count;
+	struct s_Node	*head;
+	int				i;
+	int				value;
+	int				new_value;
+	int				j;
+	int				count;
 
 	head = NULL;
 	i = 1;
-	newValue = 0;
+	new_value = 0;
 	if (argc < 2)
 	{
 		printf("Usage: %s <numbers>\n", argv[0]);
@@ -85,17 +86,17 @@ int	main(int argc, char *argv[])
 			return (1);
 		}
 		value = ft_atoi(argv[i]);
-		appendNode(&head, value);
+		append_node(&head, value);
 		i++;
 	}
 	if (check_and_exit_on_dupes(head))
 		return (1);
-	while (!allProcessed(head))
+	while (!all_processed(head))
 	{
-		processLowestUnprocessedNumber(head, newValue);
-		newValue++;
+		process_lowest_unprocessed_number(head, new_value);
+		new_value++;
 	}
-	printStack(head);
+	print_stack(head);
 	count = argc - 1;
 	if (count == 3)
 		sort_3(&head);
@@ -105,16 +106,16 @@ int	main(int argc, char *argv[])
 		sort_5(&head);
 	else
 	{
-		updateBinaryRepresentation(head);
-		Sorting(&head);
+		update_binary_representation(head);
+		sorting(&head);
 	}
-	printStack(head);
-	if (!allProcessed(head))
+	print_stack(head);
+	if (!all_processed(head))
 	{
 		printf("Sorting Failed.\n");
 		return (1);
 	}
-	freeList(head);
+	free_list(head);
 	printf("%d\n", count);
 	return (0);
 }

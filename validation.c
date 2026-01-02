@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:39:30 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/29 20:21:42 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 20:59:38 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 int	check_for_dupes(struct s_Node *head)
 {
 	struct s_Node	*current;
-	struct s_Node	*duplicateFinder;
+	struct s_Node	*duplicate_finder;
 
 	current = head;
-	duplicateFinder = NULL;
+	duplicate_finder = NULL;
 	while (current != NULL)
 	{
-		duplicateFinder = current->next;
-		while (duplicateFinder != NULL)
+		duplicate_finder = current->next;
+		while (duplicate_finder != NULL)
 		{
-			if (current->data == duplicateFinder->data)
+			if (current->data == duplicate_finder->data)
 				return (1);
-			duplicateFinder = duplicateFinder->next;
+			duplicate_finder = duplicate_finder->next;
 		}
 		current = current->next;
 	}
@@ -66,7 +66,6 @@ int	check_all_ints(char *list[], int size)
 		arg = list[i];
 		if (*arg == '\0')
 			return (1);
-		// Check if it's just a '+' or '-'
 		if ((*arg == '+' || *arg == '-') && *(arg + 1) == '\0')
 			return (1);
 		if (*arg == '+' || *arg == '-')
@@ -80,4 +79,18 @@ int	check_all_ints(char *list[], int size)
 		i++;
 	}
 	return (0);
+}
+
+int	all_processed(struct s_Node *head)
+{
+	struct s_Node	*current;
+
+	current = head;
+	while (current != NULL)
+	{
+		if (current->process == 'u')
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }

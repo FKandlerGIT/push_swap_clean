@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:04:00 by fekandle          #+#    #+#             */
-/*   Updated: 2025/12/29 20:17:20 by fekandle         ###   ########.fr       */
+/*   Updated: 2025/12/31 19:58:26 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	list_length(struct s_Node *head)
 	return (len);
 }
 
-int	countStack(struct s_Node *Stack_A)
+int	count_stack(struct s_Node *Stack_A)
 {
 	struct s_Node	*counter;
-	int			count;
+	int				count;
 
 	count = 0;
 	counter = Stack_A;
@@ -40,11 +40,12 @@ int	countStack(struct s_Node *Stack_A)
 	return (count);
 }
 
-void	move_Stacks(struct s_Node **Stack_A, struct s_Node **Stack_B, int bitIndex)
+void	move_stacks(struct s_Node **Stack_A, struct s_Node **Stack_B,
+		int bitindex)
 {
 	char	bit;
 
-	bit = (*Stack_A)->binary[bitIndex];
+	bit = (*Stack_A)->binary[bitindex];
 	if (bit == '0')
 		move_and_write(pb, Stack_A, Stack_B);
 	else
