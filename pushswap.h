@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:23 by marvin            #+#    #+#             */
-/*   Updated: 2025/12/31 20:02:23 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 22:13:45 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void				move_stacks(struct s_Node **Stack_A,
 void				sort_3(struct s_Node **head);
 void				sort_4(struct s_Node **head);
 void				sort_5(struct s_Node **head);
+int					sort_stacks(struct s_Node **head);
 
 int					ft_atoi(const char *str);
 

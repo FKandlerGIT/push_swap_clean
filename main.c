@@ -6,7 +6,7 @@
 /*   By: fekandle <fekandle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 01:38:58 by marvin            #+#    #+#             */
-/*   Updated: 2026/01/02 19:13:59 by fekandle         ###   ########.fr       */
+/*   Updated: 2026/01/02 22:14:19 by fekandle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,26 @@ int	check_overflow_single(char *str)
 	return (0);
 }
 
+int	sort_stacks(struct s_Node **head)
+{
+	int	count;
+
+	count = 0;
+	count = count_stack(*head);
+	if (count == 3)
+		sort_3(head);
+	else if (count == 4)
+		sort_4(head);
+	else if (count == 5)
+		sort_5(head);
+	else
+	{
+		update_binary_representation(*head);
+		sorting(head);
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	struct s_Node	*head;
@@ -56,7 +76,6 @@ int	main(int argc, char *argv[])
 	int				value;
 	int				new_value;
 	int				j;
-	int				count;
 
 	head = NULL;
 	i = 1;
@@ -97,18 +116,7 @@ int	main(int argc, char *argv[])
 		new_value++;
 	}
 	print_stack(head);
-	count = argc - 1;
-	if (count == 3)
-		sort_3(&head);
-	else if (count == 4)
-		sort_4(&head);
-	else if (count == 5)
-		sort_5(&head);
-	else
-	{
-		update_binary_representation(head);
-		sorting(&head);
-	}
+	sort_stacks(&head);
 	print_stack(head);
 	if (!all_processed(head))
 	{
@@ -116,6 +124,5 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	free_list(head);
-	printf("%d\n", count);
 	return (0);
 }
